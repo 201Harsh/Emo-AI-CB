@@ -20,4 +20,13 @@ router.post(
   UserController.verifyUser
 );
 
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Invalid email"),
+    body("password").not().isEmpty().withMessage("Password is required"),
+  ],
+  UserController.loginUser
+);
+
 module.exports = router;
