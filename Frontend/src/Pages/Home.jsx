@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import PopUp from "../Components/PopUp";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +54,6 @@ const Home = () => {
   const Navigate = useNavigate();
 
   useEffect(() => {
-    setusername(localStorage.getItem("name"));
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsOpen(true); // Desktop
@@ -77,8 +77,31 @@ const Home = () => {
     };
   }, []);
 
+    useEffect(() => {
+    setusername(localStorage.getItem("name"));
+    const resgenornot = localStorage.getItem("responseornot");
+
+    if (resgenornot === "true") {
+      setIsResGen(true);
+      setShowPopup(false);
+    } else {
+      setIsResGen(false);
+    }
+  }, []);
+
+  const popupcontroller = () => {
+    setShowPopup(true);
+    setIsResGen(true);
+  };
+
   return (
     <>
+    <PopUp
+        isOpen={showPopup}
+        onClose={() => setShowPopup(false)}
+        title={`Hello, ${username}!`}
+        message="Impressed with the work so Do Follow Us on Social Media"
+      />
       <div className="h-screen w-screen bg-gray-900 relative overflow-hidden">
         {/* Button to open sidebar */}
         {IsTite ? (
@@ -194,7 +217,7 @@ const Home = () => {
           {/* Main content area */}
           <div className="bg-gray-900 h-full w-full md:w-[80%]">
             {!IsResGen ? (
-              <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10 overflow-hidden">                
+              <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10 overflow-hidden">
                 {/* Main greeting with premium animation */}
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -340,6 +363,7 @@ const Home = () => {
                       boxShadow: "0 10px 25px -5px rgba(234, 179, 8, 0.3)",
                     }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={popupcontroller}
                     className="cursor-pointer w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl
           shadow-lg transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden"
                   >
