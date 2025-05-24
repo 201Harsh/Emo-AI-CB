@@ -4,6 +4,8 @@ import {
 } from "@heroicons/react/20/solid";
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
+import AxiosInstance from "../Config/Axios";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -62,6 +64,43 @@ const OTPVerification = () => {
     const enteredOtp = otp.join("");
 
     // Add your OTP verification logic here
+
+    try {
+      const response = await AxiosInstance.post("/users/verify", {
+        email,
+        otp: enteredOtp,
+      });
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+        setTimeout(() => {
+          Navigate("/home");
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data?.error || error.response.data.message , {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
   };
 
   // Auto-focus first input on mount
@@ -137,7 +176,7 @@ const OTPVerification = () => {
               to="/register"
               className="font-medium text-yellow-400 hover:text-yellow-300 hover:underline transition-colors"
             >
-              Change email address  
+              Change email address
             </Link>
           </div>
         </div>
