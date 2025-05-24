@@ -53,6 +53,7 @@ const Home = () => {
   const Navigate = useNavigate();
 
   useEffect(() => {
+    setusername(localStorage.getItem("name"));
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsOpen(true); // Desktop
@@ -168,9 +169,7 @@ const Home = () => {
                   </span>
                 </div>
                 <div className="p-4 border-t border-white/10">
-                  <button
-                    className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all"
-                  >
+                  <button className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -195,34 +194,7 @@ const Home = () => {
           {/* Main content area */}
           <div className="bg-gray-900 h-full w-full md:w-[80%]">
             {!IsResGen ? (
-              <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10 overflow-hidden">
-                {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden z-0">
-                  {[...Array(15)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute rounded-full bg-yellow-400/10"
-                      style={{
-                        width: Math.random() * 10 + 5 + "px",
-                        height: Math.random() * 10 + 5 + "px",
-                        top: Math.random() * 100 + "%",
-                        left: Math.random() * 100 + "%",
-                      }}
-                      animate={{
-                        y: [0, (Math.random() - 0.5) * 100],
-                        x: [0, (Math.random() - 0.5) * 100],
-                        opacity: [0.2, 0.8, 0.2],
-                      }}
-                      transition={{
-                        duration: Math.random() * 10 + 10,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                      }}
-                    />
-                  ))}
-                </div>
-
+              <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10 overflow-hidden">                
                 {/* Main greeting with premium animation */}
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -253,42 +225,6 @@ const Home = () => {
                           <span className="bg-clip-text ml-2 text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400">
                             {username}
                           </span>
-                          {/* Animated underline */}
-                          <motion.span
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{
-                              delay: 0.6,
-                              duration: 0.8,
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                          />
-                          {/* Floating particles around name */}
-                          {[...Array(4)].map((_, i) => (
-                            <motion.span
-                              key={i}
-                              className="absolute text-yellow-400/80"
-                              style={{
-                                fontSize: `${Math.random() * 12 + 8}px`,
-                                top: `${Math.random() * 30 - 15}px`,
-                                left: `${Math.random() * 100}%`,
-                              }}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{
-                                opacity: [0, 0.8, 0],
-                                y: [10, -15, -30],
-                                x: [0, (Math.random() - 0.5) * 40],
-                              }}
-                              transition={{
-                                delay: 0.8 + i * 0.2,
-                                duration: 2,
-                                repeat: Infinity,
-                                repeatDelay: 4,
-                              }}
-                            >
-                              {["✨", "⚡", "🌟", "💎"][i % 4]}
-                            </motion.span>
-                          ))}
                         </span>
                       </motion.span>
                       <span className="inline-block wave">👋</span>
