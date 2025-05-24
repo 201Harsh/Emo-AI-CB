@@ -91,7 +91,7 @@ module.exports.loginUser = async (req, res) => {
 
   if (!User) {
     return res.status(400).json({
-      message: "User not found",
+      message: "Invalid Credentials",
     });
   }
 
@@ -99,7 +99,7 @@ module.exports.loginUser = async (req, res) => {
 
   if (!isPasswordMatch) {
     return res.status(400).json({
-      message: "Invalid password",
+      message: "Invalid Credentials",
     });
   }
 
