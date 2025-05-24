@@ -298,7 +298,7 @@ export default function Landing() {
                 About
               </Link>
               <Link
-                to="/register"
+                to="/authprompt"
                 className="bg-gradient-to-r from-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-gray-900 md:px-6 md:py-2 px-4 py-1 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
               >
                 Get Started

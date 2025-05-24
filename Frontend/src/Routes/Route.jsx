@@ -11,6 +11,7 @@ import About from "../Pages/About";
 import Pricing from "../Pages/Pricing";
 import AuthPrompt from "../Pages/AuthPrompt";
 import OTPVerification from "../Pages/OtpVerification";
+import HomeProctector from "../Pages/HomeProctector";
 
 const Router = () => {
   return (
@@ -21,7 +22,14 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<OTPVerification />} />
         <Route path="/authprompt" element={<AuthPrompt />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <HomeProctector>
+              <Home />
+            </HomeProctector>
+          }
+        />
         <Route path="/features" element={<Features />} />
         <Route path="/help" element={<HelpPage />} />
         <Route path="/contact" element={<Contact />} />
