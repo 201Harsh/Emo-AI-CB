@@ -16,6 +16,7 @@ import { toast, Bounce } from "react-toastify";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import PopUp from "../Components/PopUp";
+import ChatUI from "./ChatUI";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
