@@ -34,6 +34,85 @@ const Register = () => {
     return strength;
   };
 
+  const validateEmail = (email) => {
+    // Regular expression for basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if email is valid format
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return false;
+    }
+
+    // Extract domain
+    const domain = email.split("@")[1].toLowerCase();
+
+    // List of known temporary email domains
+    const tempEmailDomains = [
+      "tempmail.com",
+      "mailinator.com",
+      "10minutemail.com",
+      "guerrillamail.com",
+      "yopmail.com",
+      "trashmail.com",
+      "fakeinbox.com",
+      "throwawaymail.com",
+      "temp-mail.org",
+      // Add more temporary email domains as needed
+    ];
+
+    // Check if domain is Gmail (including googlemail.com and variations)
+    const isGmail = domain === "gmail.com" || domain === "googlemail.com";
+
+    // Check if domain is a temporary email service
+    const isTempEmail = tempEmailDomains.some(
+      (tempDomain) =>
+        domain.includes(tempDomain) || domain.endsWith(`.${tempDomain}`)
+    );
+
+    if (!isGmail) {
+      toast.error("Enter a Valid Email", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return false;
+    }
+
+    if (isTempEmail) {
+      toast.error("Temporary email addresses are not allowed", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handlePasswordChange = (e) => {
     const pass = e.target.value;
     setPassword(pass);
@@ -118,39 +197,6 @@ const Register = () => {
       default:
         return "bg-gray-600";
     }
-  };
-
-  const ServiceNotAvailable = () => {
-    toast.error("Service not available", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-      return false;
-    }
-    return true;
   };
 
   return (
