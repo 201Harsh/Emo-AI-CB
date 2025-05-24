@@ -8,52 +8,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
-import axios from "../Config/Axios";
 
 
 
 const Settings = () => {
   const Navigate = useNavigate();
-
-  const handleLogout = async () => {
-    const token = localStorage.getItem("token");
-    const response = await axios.get("/users/logout", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (response.status === 200) {
-      localStorage.clear();
-      toast.success("🧑 User Logout Successfully", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-      setTimeout(() => {
-        Navigate("/login");
-      }, 2000);
-    }
-  };
   return (
     <div className="bg-gray-900 min-h-screen p-6 md:p-8">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Bounce}
-      />
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center gap-2">
           <Cog6ToothIcon className="h-8 w-8" />
@@ -153,12 +114,12 @@ const Settings = () => {
               <TrashIcon className="h-5 w-5" />
               Danger Zone
             </h2>
-            <div onClick={handleLogout} className="space-y-4">
+            <div  className="space-y-4">
               <button className="w-full bg-red-500/20 hover:bg-red-600/30 text-red-400 px-4 py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2">
                 <TrashIcon className="h-5 w-5" />
                 Delete Account
               </button>
-              <button onClick={handleLogout} className="w-full bg-yellow-500/20 hover:bg-yellow-600/30 text-yellow-400 px-4 py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+              <button  className="w-full bg-yellow-500/20 hover:bg-yellow-600/30 text-yellow-400 px-4 py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2">
                 <ArrowLeftOnRectangleIcon className="h-5 w-5" />
                 Logout All Devices
               </button>

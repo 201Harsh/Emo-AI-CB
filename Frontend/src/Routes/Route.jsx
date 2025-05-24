@@ -12,6 +12,8 @@ import Pricing from "../Pages/Pricing";
 import AuthPrompt from "../Pages/AuthPrompt";
 import OTPVerification from "../Pages/OtpVerification";
 import HomeProctector from "../Pages/HomeProctector";
+import Profile from "../Pages/Profile";
+import Settings from "../Pages/Setting";
 
 const Router = () => {
   return (
@@ -35,6 +37,8 @@ const Router = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );

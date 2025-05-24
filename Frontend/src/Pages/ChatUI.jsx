@@ -8,7 +8,7 @@ import {
 const ChatUI = () => {
   const [messages, setMessages] = useState([
     { text: "Hello! How can I assist you today?", sender: "Ai" },
-    { text: "Hi there! I have a question.", sender: "user" }
+    { text: "Hi there! I have a question.", sender: "user" },
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -28,10 +28,13 @@ const ChatUI = () => {
       setInputMessage("");
       // Simulate AI response
       setTimeout(() => {
-        setMessages(prev => [...prev, { 
-          text: "Thanks for your message! This is a simulated response.", 
-          sender: "Ai" 
-        }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            text: "Thanks for your message! This is a simulated response.Please let me know if you have any additional questions.",
+            sender: "Ai",
+          },
+        ]);
       }, 1000);
     }
   };
@@ -48,7 +51,9 @@ const ChatUI = () => {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex ${
+              message.sender === "user" ? "justify-end" : "justify-start"
+            }`}
           >
             <div
               className={`max-w-[85%] p-3 rounded-xl ${
