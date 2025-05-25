@@ -25,7 +25,6 @@ const HomeProctector = ({ children }) => {
           Navigate("/login");
         }
       } catch (error) {
-        console.log(error);
         localStorage.clear();
         Navigate("/");
       }

@@ -17,6 +17,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import PopUp from "../Components/PopUp";
 import ChatUI from "./ChatUI";
+import AxiosInstance from "../Config/Axios";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +79,7 @@ const Home = () => {
     };
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     setusername(localStorage.getItem("name"));
     const resgenornot = localStorage.getItem("responseornot");
 
@@ -95,9 +96,30 @@ const Home = () => {
     setIsResGen(true);
   };
 
+  const handleLogout = async () => {
+    const response = await AxiosInstance.get("/users/logout");
+    if (response.status === 200) {
+      toast.success(response.data.message, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setTimeout(() => {
+        Navigate("/login");
+        localStorage.clear();
+      }, 2000);
+    }
+  };
+
   return (
     <>
-    <PopUp
+      <PopUp
         isOpen={showPopup}
         onClose={() => setShowPopup(false)}
         title={`Hello, ${username}!`}
@@ -193,7 +215,10 @@ const Home = () => {
                   </span>
                 </div>
                 <div className="p-4 border-t border-white/10">
-                  <button className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all">
+                  <button
+                    onClick={handleLogout}
+                    className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
