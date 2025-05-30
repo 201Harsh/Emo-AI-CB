@@ -20,12 +20,16 @@ const AutoRedirect = () => {
           </>
         );
       }
-    }, 6000); // Optional delay to show the preloader
+    }, 1200); // Optional delay to show the preloader
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  return showPreloader ? <Loader /> : null;
+  return showPreloader ? (
+    <div className="h-screen w-screen flex items-center justify-center bg-gray-900">
+      <h1 className="text-5xl font-bold text-yellow-400">Loading....</h1>
+    </div>
+  ) : null;
 };
 
 export default AutoRedirect;
