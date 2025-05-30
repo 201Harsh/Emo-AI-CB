@@ -16,7 +16,7 @@ const AutoRedirect = () => {
       } else {
         setIstoken(true);
       }
-    }, 1200); // Optional delay to show the preloader
+    }, 300); // Optional delay to show the preloader
 
     return () => clearTimeout(timer);
   }, [navigate, token]);
