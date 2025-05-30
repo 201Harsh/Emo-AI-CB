@@ -15,6 +15,8 @@ import HomeProctector from "../Pages/HomeProctector";
 import Profile from "../Pages/Profile";
 import Settings from "../Pages/Setting";
 import AutoRedirect from "../Pages/AutoRedirect";
+import Payment from "../Pages/Payment";
+import Careers from "../Pages/Carrer";
 
 const Router = () => {
   return (
@@ -40,6 +42,8 @@ const Router = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/payment/:planId" element={<Payment />} />
+        <Route path="/careers" element={<Careers />} />
       </Routes>
     </BrowserRouter>
   );
