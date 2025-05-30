@@ -57,7 +57,39 @@ const OTPVerification = () => {
     }
   };
 
-  const handleOtpResend = async () => {};
+  const handleOtpResend = async () => {
+    try {
+      const response = await AxiosInstance.post("/users/resendotp", {
+        email : email,
+      });
+      if (response.status === 200) {
+        toast.success(response.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
