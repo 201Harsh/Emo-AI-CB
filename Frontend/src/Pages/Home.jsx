@@ -314,8 +314,8 @@ const Home = () => {
                         repeatType: "reverse",
                       }}
                     >
-                      <span className="text-yellow-400">Harsh's</span> AI
-                      Assistant is ready to assist you!
+                      <span className="text-yellow-400">Harsh's</span> EmoAI
+                       is ready to assist you!
                     </motion.span>
                   </motion.h2>
                 </motion.div>
@@ -339,17 +339,7 @@ const Home = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <div className="flex flex-col items-center text-center h-full justify-center">
-                        <motion.span
-                          className="text-4xl mb-4"
-                          animate={{
-                            scale: activeFeature === index ? [1, 1.2, 1] : 1,
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            repeatType: "reverse",
-                          }}
-                        >
+                        <motion.span className="text-4xl mb-4">
                           {feature.icon}
                         </motion.span>
                         <h3 className="text-xl font-bold text-yellow-400 mb-2">
@@ -385,7 +375,7 @@ const Home = () => {
                 >
                   <motion.button
                     whileHover={{
-                      scale: 1.02,
+                      scale: 1.01,
                       boxShadow: "0 10px 25px -5px rgba(234, 179, 8, 0.3)",
                     }}
                     whileTap={{ scale: 0.98 }}
@@ -394,16 +384,7 @@ const Home = () => {
           shadow-lg transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden"
                   >
                     {/* Button shine effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-white/20"
-                      initial={{ x: "-100%" }}
-                      animate={{ x: "100%" }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 3,
-                      }}
-                    />
+                    <motion.div />
                     <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
                     Start Conversation
                     <PaperAirplaneIcon className="h-5 w-5" />
