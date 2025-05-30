@@ -34,4 +34,10 @@ router.get("/logout", UserMiddleware.AuthUser, UserController.logoutUser);
 
 router.get("/getUser", UserMiddleware.AuthUser, UserController.getUser);
 
+router.post(
+  "/resendOtp",
+  [body("email").isEmail().withMessage("Invalid email")],
+  UserController.resendOtp
+);
+
 module.exports = router;
