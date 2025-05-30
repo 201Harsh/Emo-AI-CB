@@ -242,7 +242,7 @@ const stats = [
   },
 ];
 
-export default function Landing() {
+export default function Start() {
   const mainControls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
