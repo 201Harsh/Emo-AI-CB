@@ -14,12 +14,13 @@ import OTPVerification from "../Pages/OtpVerification";
 import HomeProctector from "../Pages/HomeProctector";
 import Profile from "../Pages/Profile";
 import Settings from "../Pages/Setting";
+import AutoRedirect from "../Pages/AutoRedirect";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Start />} />
+        <Route path="/" element={<AutoRedirect />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<OTPVerification />} />
