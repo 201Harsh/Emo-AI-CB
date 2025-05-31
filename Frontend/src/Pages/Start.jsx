@@ -19,8 +19,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
-import CountUp from "../Components/CountUp"; 
-import { StarRating } from "../Components/StartRating"; 
+import CountUp from "../Components/CountUp";
+import { StarRating } from "../Components/StartRating";
 
 const features = [
   {
@@ -193,10 +193,10 @@ const stats = [
       <div className="flex items-end">
         <CountUp
           from={0}
-          to={98}
+          to={97}
           separator=","
           direction="up"
-          duration={1}
+          duration={2}
           className="count-up-text"
         />
         <span className="text-yellow-400">%</span>
@@ -209,10 +209,10 @@ const stats = [
       <div className="flex items-end">
         <CountUp
           from={0}
-          to={5000}
+          to={12000}
           separator=","
           direction="up"
-          duration={3}
+          duration={1}
           className="count-up-text"
         />
         <span className="text-yellow-400">+</span>
@@ -225,7 +225,7 @@ const stats = [
       <div className="flex items-end">
         <CountUp
           from={0}
-          to={450}
+          to={500}
           separator=","
           direction="up"
           duration={2}
@@ -301,7 +301,7 @@ export default function Start() {
                 to="/authprompt"
                 className="bg-gradient-to-r from-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-gray-900 md:px-6 md:py-2 px-4 py-1 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
               >
-                Get Started
+                Try Now
                 <SparklesIcon className="h-4 w-4 " />
               </Link>
             </motion.div>
@@ -311,8 +311,6 @@ export default function Start() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-gray-800 to-gray-900 py-20 overflow-hidden">
-        
-
         <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -337,8 +335,8 @@ export default function Start() {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Experience AI that doesn't just respond - it understands, adapts,
-              and grows with you through every conversation.
+              Experience AI that goes beyond responses — it understands, adapts,
+              and evolves with you through every conversation.
             </p>
 
             {/* Stats Bar */}
