@@ -17,6 +17,7 @@ import Settings from "../Pages/Setting";
 import AutoRedirect from "../Pages/AutoRedirect";
 import Payment from "../Pages/Payment";
 import Careers from "../Pages/Carrer";
+import PersonalDetails from "../Pages/PersonalDetails";
 
 const Router = () => {
   return (
@@ -44,6 +45,7 @@ const Router = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/payment/:planId" element={<Payment />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/details" element={<PersonalDetails />} />
       </Routes>
     </BrowserRouter>
   );
