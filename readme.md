@@ -1,6 +1,6 @@
 # 🤖 EmoAI ChatBot (MERN + EndGaming AI) [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-An AI-powered chatbot web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) integrated with the Endgaming AI API. Users can register, log in, and interact with an intelligent chatbot. The app also includes a credit-based system to limit API usage.
+Now upgraded to its next-gen version, this AI-powered chatbot web application is built on the MERN stack (MongoDB, Express.js, React.js, Node.js) and seamlessly integrates the Endgaming AI API. Users can register, log in, and engage with an intelligent, adaptive chatbot—enhanced by a credit-based system to manage API usage effectively.
 
 ---
 
