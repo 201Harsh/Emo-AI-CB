@@ -12,10 +12,53 @@ import { motion } from "framer-motion";
 const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const timerRef = useRef(null);
 
   const Navigate = useNavigate();
 
   const email = localStorage?.getItem("email") || "emoaichatbot@gmail.com";
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
+  useEffect(() => {
+    // Start the timer when component mounts
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          // Redirect to register page when time runs out
+          toast.error("OTP verification time expired", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+          Navigate("/register");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    // Clear interval on component unmount or OTP success
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [Navigate]);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
