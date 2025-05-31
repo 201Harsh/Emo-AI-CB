@@ -323,11 +323,11 @@ export default function Start() {
                   "Emotionally Intelligent AI",
                   2000,
                   "Your Personal Companion",
-                  2000,
+                  1200,
                   "Always Here For You",
-                  2000,
+                  1200,
                   "Conversation Reimagined",
-                  2000,
+                  1200,
                 ]}
                 speed={50}
                 repeat={Infinity}
