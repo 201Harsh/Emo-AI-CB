@@ -20,14 +20,9 @@ const PersonalDetails = () => {
   const [formData, setFormData] = useState({
     profilePic: null,
     previewImage: "",
-    dob: "",
+    age: "",
     gender: "",
     aiCompanionType: "", // Changed from seeking[] to single string
-    interests: "",
-    bio: "",
-    location: "",
-    occupation: "",
-    education: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -220,21 +215,34 @@ const PersonalDetails = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Date of Birth */}
+              {/* Age Input */}
               <div>
                 <label className="block text-gray-300 text-sm font-medium mb-2">
-                  Date of Birth
+                  Age
                 </label>
                 <div className="relative">
                   <CakeIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
-                    type="date"
-                    name="dob"
-                    value={formData.dob}
+                    type="number"
+                    name="age"
+                    id="age"
+                    min="1"
+                    max="120"
+                    value={formData.age}
+                    required
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all"
+                    placeholder="Enter age (1-120)"
+                    className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all appearance-none"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                   />
                 </div>
+                {formData.age && (
+                  <p className="mt-1 text-xs text-gray-400">
+                    Born approximately in{" "}
+                    {new Date().getFullYear() - formData.age}
+                  </p>
+                )}
               </div>
 
               {/* Gender */}
@@ -246,6 +254,8 @@ const PersonalDetails = () => {
                   <UserIcon className="h-5 w-5 text-yellow-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <select
                     name="gender"
+                    id="gender"
+                    required
                     value={formData.gender}
                     onChange={handleChange}
                     className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all appearance-none"

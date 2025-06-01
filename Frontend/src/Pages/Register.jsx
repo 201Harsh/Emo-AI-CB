@@ -163,7 +163,7 @@ const Register = () => {
           });
         });
       } else {
-        toast.error(error.response?.data?.errors || "Something went wrong!", {
+        toast.error(error.response?.data?.errors || error.response.data?.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
