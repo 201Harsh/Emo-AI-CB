@@ -2,7 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 const ChatUI = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      sender: "ai",
+      text: "Hello! I'm your AI assistant. How can I help you today?",
+    },
+  ]);
   const [inputMessage, setInputMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -30,7 +35,36 @@ const ChatUI = () => {
     e.preventDefault();
     if (!inputMessage.trim()) return;
     
-    // Add your message handling logic here
+    // Add user message
+    const userMessage = {
+      sender: "user",
+      text: inputMessage,
+    };
+    
+    setMessages((prev) => [...prev, userMessage]);
+    setInputMessage("");
+    setLoading(true);
+    
+    // Simulate AI response after a short delay
+    setTimeout(() => {
+      const aiResponses = [
+        "I understand what you're asking about. Let me think about that...",
+        "That's an interesting question! Here's what I know about it.",
+        "I can help with that. Here's some information that might be useful:",
+        "Thanks for your message! I'm processing your request now.",
+        "I've received your question and I'm working on a response for you."
+      ];
+      
+      const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+      
+      const aiMessage = {
+        sender: "ai",
+        text: randomResponse,
+      };
+      
+      setMessages((prev) => [...prev, aiMessage]);
+      setLoading(false);
+    }, 1000);
   };
 
   // Format the AI response to show highlighted text
@@ -132,8 +166,8 @@ const ChatUI = () => {
             <div
               className={`p-3 min-w-20 max-w-[85%] md:text-sm text-xs ${
                 message.sender === "user"
-                  ? "bg-gray-700 text-yellow-400"
-                  : "bg-gray-300 text-gray-900"
+                  ? "bg-gray-700 text-yellow-400 rounded-tr-none"
+                  : "bg-gray-300 text-gray-900 rounded-tl-none"
               } flex flex-col justify-start items-start rounded-xl`}
             >
               {formatMessage(message.text)}
@@ -143,11 +177,11 @@ const ChatUI = () => {
 
         {loading && (
           <div className="flex justify-start w-full">
-            <div className="p-3 h-12 min-w-20 max-w-[85%] bg-gray-200 text-gray-900/100 flex items-center rounded-xl animate-pulse">
-              <div className="w-2 h-2 bg-gray-500 rounded-full mr-2"></div>
-              <div className="flex-1">
-                <div className="h-2 bg-gray-500 rounded mb-1.5 w-3/4"></div>
-                <div className="h-2 bg-gray-600 rounded w-1/2"></div>
+            <div className="p-3 min-w-20 max-w-[85%] bg-gray-300 text-gray-900 rounded-tl-none rounded-xl">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-gray-600 animate-bounce" style={{ animationDelay: '300ms' }}></div>
               </div>
             </div>
           </div>
@@ -176,13 +210,16 @@ const ChatUI = () => {
               type="submit"
               className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-3 py-2 
                     rounded-lg transition duration-200 flex items-center justify-center
-                    active:scale-95"
+                    active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={loading || !inputMessage.trim()}
             >
               <PaperAirplaneIcon className="h-4 w-4 rotate-[-40deg]" />
             </button>
           </form>
         </div>
+        <p className="text-xs text-yellow-400/50 mt-2 text-center">
+          EmoAI may produce inaccurate information about people, places, or facts.
+        </p>
       </div>
     </div>
   );

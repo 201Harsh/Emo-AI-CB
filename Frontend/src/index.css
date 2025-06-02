@@ -61,3 +61,7 @@
     opacity: 0.5;
   }
 }
+
+.chat-box::-webkit-scrollbar {
+  display: none;
+}
