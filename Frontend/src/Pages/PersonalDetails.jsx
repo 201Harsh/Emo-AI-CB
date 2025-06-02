@@ -17,44 +17,34 @@ import AxiosInstance from "../Config/Axios";
 import { toast, Bounce } from "react-toastify";
 
 const PersonalDetails = () => {
-  const [formData, setFormData] = useState({
-    profilePic: null,
-    previewImage: "",
-    age: "",
-    gender: "",
-    aiCompanionType: "", // Changed from seeking[] to single string
-  });
+  const [profilePic, setProfilePic] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [aiCompanionType, setAiCompanionType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          profilePic: file,
-          previewImage: reader.result,
-        });
+        setProfilePic(file);
+        setPreviewImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleCompanionSelect = (option) => {
-    setFormData({ ...formData, aiCompanionType: option });
+    setAiCompanionType(option);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.aiCompanionType) {
+    if (!aiCompanionType) {
       toast.error("Please select an AI companion type", {
         position: "top-right",
         autoClose: 5000,
@@ -72,21 +62,23 @@ const PersonalDetails = () => {
     setIsLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      for (const key in formData) {
-        if (formData[key] !== null) {
-          formDataToSend.append(key, formData[key]);
-        }
+      const formData = new FormData();
+      if (profilePic) {
+        formData.append("profilePic", profilePic);
       }
+      formData.append("age", age);
+      formData.append("gender", gender);
+      formData.append("aiCompanionType", aiCompanionType);
 
       const response = await AxiosInstance.post(
-        "/users/profile",
-        formDataToSend,
+        "/users/CreateUserInfo",
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+          age,
+          gender,
+          AICompanion: aiCompanionType,
+          profilePic: profilePic || null,
+        },
+      
       );
 
       if (response.status === 200) {
@@ -101,7 +93,7 @@ const PersonalDetails = () => {
           theme: "dark",
           transition: Bounce,
         });
-        navigate("/dashboard");
+        navigate("/home");
       }
     } catch (error) {
       console.error(error);
@@ -184,9 +176,9 @@ const PersonalDetails = () => {
             <div className="flex flex-col items-center mb-6">
               <div className="relative group">
                 <div className="h-32 w-32 rounded-full bg-gray-800 border-2 border-yellow-500/50 flex items-center justify-center overflow-hidden">
-                  {formData.previewImage ? (
+                  {previewImage ? (
                     <img
-                      src={formData.previewImage}
+                      src={previewImage}
                       alt="Profile preview"
                       className="h-full w-full object-cover"
                     />
@@ -228,19 +220,18 @@ const PersonalDetails = () => {
                     id="age"
                     min="1"
                     max="120"
-                    value={formData.age}
+                    value={age}
                     required
-                    onChange={handleChange}
+                    onChange={(e) => setAge(e.target.value)}
                     placeholder="Enter age (1-120)"
                     className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all appearance-none"
                     inputMode="numeric"
                     pattern="[0-9]*"
                   />
                 </div>
-                {formData.age && (
+                {age && (
                   <p className="mt-1 text-xs text-gray-400">
-                    Born approximately in{" "}
-                    {new Date().getFullYear() - formData.age}
+                    Born approximately in {new Date().getFullYear() - age}
                   </p>
                 )}
               </div>
@@ -256,8 +247,8 @@ const PersonalDetails = () => {
                     name="gender"
                     id="gender"
                     required
-                    value={formData.gender}
-                    onChange={handleChange}
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all appearance-none"
                   >
                     <option disabled hidden value="">
@@ -286,7 +277,7 @@ const PersonalDetails = () => {
                       type="button"
                       onClick={() => handleCompanionSelect(option.value)}
                       className={`w-full flex items-center justify-center p-3 rounded-lg border transition-all ${
-                        formData.aiCompanionType === option.value
+                        aiCompanionType === option.value
                           ? "bg-yellow-500/20 border-yellow-500 text-yellow-400"
                           : "bg-gray-800/60 border-gray-700 text-gray-300 hover:border-yellow-500/50"
                       }`}

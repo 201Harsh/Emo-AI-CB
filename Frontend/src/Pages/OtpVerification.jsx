@@ -161,7 +161,7 @@ const OTPVerification = () => {
           transition: Bounce,
         });
         setTimeout(() => {
-          Navigate("/home");
+          Navigate("/details");
         }, 1000);
       }
     } catch (error) {
