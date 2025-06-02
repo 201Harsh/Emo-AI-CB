@@ -202,7 +202,7 @@ module.exports.resendOtp = async (req, res) => {
       },
       { new: true } // Return the updated document
     );
-    
+
     return res.status(200).json({
       msg: "OTP sent successfully",
       newOtp,
@@ -211,6 +211,44 @@ module.exports.resendOtp = async (req, res) => {
     console.log(error);
     return res.status(400).json({
       error: error.message,
+    });
+  }
+};
+
+module.exports.getUserInfo = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { age, gender, AICompanion, profilePic } = req.body;
+
+    const userId = req.user;
+
+    const User = await userModel.findById(userId.id);
+
+    if (!User) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+    const userDeatils = await UserServices.CreateUserInfo({
+      id: userId.id,
+      age,
+      gender,
+      AICompanion,
+      profilePic,
+    });
+
+    return res.status(200).json({
+      message: "User details updated successfully",
+      data: userDeatils,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
     });
   }
 };

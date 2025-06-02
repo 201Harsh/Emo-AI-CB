@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  age: {
+    type: Number,
+  },
+  gender: {
+    type: String,
+  },
+  AICompanion: {
+    type: String,
+  },
+  profilePic: {
+    type: String,
+  },
 });
 
 userSchema.methods.jwtToken = function () {

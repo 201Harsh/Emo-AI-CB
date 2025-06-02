@@ -40,4 +40,15 @@ router.get("/logout", UserMiddleware.AuthUser, UserController.logoutUser);
 
 router.get("/getUser", UserMiddleware.AuthUser, UserController.getUser);
 
+router.post(
+  "/CreateUserInfo",
+  [
+    body("age").not().isEmpty().withMessage("Age is required"),
+    body("gender").not().isEmpty().withMessage("Gender is required"),
+    body("AICompanion").not().isEmpty().withMessage("AICompanion is required"),
+  ],
+  UserMiddleware.AuthUser,
+  UserController.getUserInfo
+);
+
 module.exports = router;

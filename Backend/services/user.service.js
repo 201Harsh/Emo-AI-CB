@@ -42,3 +42,27 @@ module.exports.VerifyUser = async ({ email, otp }) => {
   await User.deleteOne();
   return NewUser;
 };
+
+module.exports.CreateUserInfo = async ({
+  id,
+  age,
+  gender,
+  AICompanion,
+  profilePic,
+}) => {
+  if (!age || !gender || !AICompanion) {
+    throw new Error("All fields are required");
+  }
+
+  const userDetails = await userModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      age,
+      gender,
+      AICompanion,
+      profilePic,
+    }
+  );
+
+  return userDetails;
+};
