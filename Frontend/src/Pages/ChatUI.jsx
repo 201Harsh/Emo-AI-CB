@@ -217,9 +217,6 @@ const ChatUI = () => {
             </button>
           </form>
         </div>
-        <p className="text-xs text-yellow-400/50 mt-2 text-center">
-          EmoAI may produce inaccurate information about people, places, or facts.
-        </p>
       </div>
     </div>
   );
