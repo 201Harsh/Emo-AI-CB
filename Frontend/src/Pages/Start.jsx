@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import CountUp from "../Components/CountUp";
 import { StarRating } from "../Components/StartRating";
+import AxiosInstance from "../Config/Axios";
 
 const features = [
   {
@@ -253,6 +254,15 @@ export default function Start() {
       mainControls.start("visible");
     }
   }, [isInView, mainControls]);
+
+  useEffect(() => {
+    const handleStartServer = async () => {
+      const res = await AxiosInstance.get("/users/startServer");
+
+      console.log(res.data.message);
+    };
+    handleStartServer();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 overflow-x-hidden">
