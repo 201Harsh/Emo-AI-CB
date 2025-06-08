@@ -1,5 +1,6 @@
 const express = require("express");
 const UserRouter = require("./routes/user.route");
+const AIRouter = require("./routes/ai.route");
 
 const DbConnection = require("./config/db");
 DbConnection();
@@ -18,5 +19,8 @@ app.use(
   })
 );
 app.use("/users", UserRouter);
+app.use("/ai", AIRouter);
+
+
 
 module.exports = app;
