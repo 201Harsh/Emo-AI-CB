@@ -309,7 +309,7 @@ export default function Start() {
               </Link>
               <Link
                 to="/authprompt"
-                className="bg-gradient-to-r from-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-gray-900 md:px-6 md:py-2 px-4 py-1 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+                className="bg-gradient-to-r from-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-gray-900 md:px-6 md:py-2 px-4 py-1 rounded-full transition-all duration-300 transform hover:scale-105 hidden md:flex items-center gap-2"
               >
                 Try Now
                 <SparklesIcon className="h-4 w-4 " />
@@ -330,14 +330,18 @@ export default function Start() {
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 to-amber-600 bg-clip-text text-transparent mb-6 leading-tight">
               <TypeAnimation
                 sequence={[
-                  "Emotionally Intelligent AI",
-                  2000,
-                  "Your Personal Companion",
+                  "✨ Your Emotional AI Companion",
                   1500,
-                  "Always Here For You",
+                  "🤗 Understands How You Feel",
+                  1300,
+                  "💬 Talk Freely, Without Judgment",
                   1200,
-                  "Conversation Reimagined",
+                  "🌱 Grow Together, Every Day",
+                  1100,
+                  "❤️ AI With a Human Touch",
                   1000,
+                  "🔮 Ready When You Are...",
+                  800,
                 ]}
                 speed={50}
                 repeat={Infinity}
