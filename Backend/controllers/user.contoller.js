@@ -252,3 +252,15 @@ module.exports.getUserInfo = async (req, res) => {
     });
   }
 };
+
+module.exports.startServer = async (req, res) => {
+  try {
+    return res.status(200).json({
+      message: "Server started successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

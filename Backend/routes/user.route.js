@@ -51,4 +51,6 @@ router.post(
   UserController.getUserInfo
 );
 
+router.get('/startServer', UserController.startServer);
+
 module.exports = router;
