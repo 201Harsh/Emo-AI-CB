@@ -117,6 +117,21 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    if (isInView) {
+      mainControls.start("visible");
+    }
+  }, [isInView, mainControls]);
+
+  useEffect(() => {
+    const handleStartServer = async () => {
+      const res = await AxiosInstance.get("/users/startServer");
+
+      console.log(res.data.message);
+    };
+    handleStartServer();
+  }, []);
+
   return (
     <>
       <PopUp
@@ -314,8 +329,8 @@ const Home = () => {
                         repeatType: "reverse",
                       }}
                     >
-                      <span className="text-yellow-400">Harsh's</span> EmoAI
-                       is ready to assist you!
+                      <span className="text-yellow-400">Harsh's</span> EmoAI is
+                      ready to assist you!
                     </motion.span>
                   </motion.h2>
                 </motion.div>
