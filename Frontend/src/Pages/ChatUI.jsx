@@ -107,7 +107,7 @@ const ChatUI = () => {
           timestamp: new Date().toISOString(),
         };
 
-        setChatHistorySave((prevHistory) => {
+        setchatHistorySave((prevHistory) => {
           const updatedHistory = [...prevHistory, completedChat];
           return updatedHistory;
         });

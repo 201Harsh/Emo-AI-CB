@@ -63,7 +63,7 @@ const PopUp = ({ isOpen, onClose, title, message, buttons = [], children }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <button className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white font-medium py-2 px-5 rounded-lg text-sm shadow-md hover:shadow-lg transition-all">
+                      <button onClick={onClose} className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white font-medium py-2 px-5 rounded-lg text-sm shadow-md hover:shadow-lg transition-all">
                         Follow Me
                       </button>
                     </motion.a>
