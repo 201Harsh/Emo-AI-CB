@@ -277,6 +277,17 @@ const ChatUI = () => {
     const safeMessage = String(message);
 
     return safeMessage.split("\n").map((line, lineIndex) => {
+
+       if (/<[a-z][\s\S]*>/i.test(line)) {
+      return (
+        <div
+          key={lineIndex}
+          dangerouslySetInnerHTML={{ __html: line }}
+          className="mb-2 text-sm md:text-base"
+        />
+      );
+    }
+
       // Match markdown and anchor tags
       const regex =
         /(<a href="[^"]+"[^>]*>[^<]+<\/a>|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
