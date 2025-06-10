@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import {
+  PaperAirplaneIcon,
+  SpeakerWaveIcon,
+  StopIcon,
+} from "@heroicons/react/24/outline";
 import AxiosInstance from "../Config/Axios";
+import { toast, Bounce } from "react-toastify";
 
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
@@ -9,6 +14,11 @@ const ChatUI = () => {
   const messagesEndRef = useRef(null);
   const [IsRes, setIsRes] = useState(false);
   const [chatHistorySave, setchatHistorySave] = useState([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [currentSpeakingIndex, setCurrentSpeakingIndex] = useState(null);
+  const [companionType, setCompanionType] = useState("default");
+  const [voices, setVoices] = useState([]);
+  const speechSynthesis = window.speechSynthesis;
 
   // Load messages and chat history from localStorage on component mount
   useEffect(() => {
@@ -25,6 +35,12 @@ const ChatUI = () => {
         const savedChatHistory = localStorage.getItem("chat_history");
         if (savedChatHistory) {
           setchatHistorySave(JSON.parse(savedChatHistory));
+        }
+
+        // Load AI Companion type
+        const savedCompanion = localStorage.getItem("AICompanion");
+        if (savedCompanion) {
+          setCompanionType(savedCompanion);
         }
       } catch (error) {
         console.error("Error loading chat data from localStorage:", error);
@@ -43,6 +59,26 @@ const ChatUI = () => {
     };
 
     loadChatData();
+
+    // Load voices when they become available
+    const loadVoices = () => {
+      const availableVoices = speechSynthesis.getVoices();
+      if (availableVoices.length > 0) {
+        setVoices(availableVoices);
+      } else {
+        speechSynthesis.onvoiceschanged = () => {
+          setVoices(speechSynthesis.getVoices());
+        };
+      }
+    };
+
+    loadVoices();
+
+    // Clean up speech synthesis when component unmounts
+    return () => {
+      speechSynthesis.onvoiceschanged = null;
+      speechSynthesis.cancel();
+    };
   }, []);
 
   // Save messages and chat history to localStorage when they change
@@ -68,6 +104,100 @@ const ChatUI = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const handleSpeak = (text, index) => {
+    // If already speaking and same message, stop
+    if (isSpeaking && currentSpeakingIndex === index) {
+      speechSynthesis.cancel();
+      setIsSpeaking(false);
+      setCurrentSpeakingIndex(null);
+      return;
+    }
+
+    // If speaking another message, cancel it first
+    if (isSpeaking) {
+      speechSynthesis.cancel();
+      setTimeout(() => speakText(text, index), 150); // Delay to let cancel register
+    } else {
+      speakText(text, index);
+    }
+  };
+
+  const speakText = (text, index) => {
+    let cleanedText = text.replace(
+      /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+      ""
+    );
+
+    const headerRegex =
+      /^\*{3}EndGaming AI v[\d.]+(?:\s*\(.*?\))?\*{3}\s*\n\*{2}Harsh's EmoAI Assistant\*{2}\s*\n*/i;
+    cleanedText = cleanedText.replace(headerRegex, "").trim();
+
+    const utterance = new SpeechSynthesisUtterance(cleanedText);
+
+    // Voice selection
+    let selectedVoice = null;
+    if (voices.length > 0) {
+      if (companionType === "girlfriend") {
+        selectedVoice = voices.find((voice) =>
+          ["female", "woman", "girl", "samantha", "zira"].some((v) =>
+            voice.name.toLowerCase().includes(v)
+          )
+        );
+        if (selectedVoice) {
+          utterance.rate = 1.1;
+          utterance.pitch = 1.2;
+          utterance.volume = 1.0;
+        }
+      } else if (companionType === "boyfriend") {
+        selectedVoice = voices.find((voice) =>
+          ["male", "man", "david", "alex"].some((v) =>
+            voice.name.toLowerCase().includes(v)
+          )
+        );
+        if (selectedVoice) {
+          utterance.rate = 0.9;
+          utterance.pitch = 0.8;
+          utterance.volume = 1.0;
+        }
+      }
+
+      if (!selectedVoice) {
+        selectedVoice = voices[0];
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+      }
+
+      utterance.voice = selectedVoice;
+      utterance.lang = selectedVoice.lang || "en-US";
+    }
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setCurrentSpeakingIndex(index);
+    };
+
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setCurrentSpeakingIndex(null);
+    };
+
+    utterance.onerror = (event) => {
+      if (event.error !== "interrupted") {
+        toast.error(`Voice playback failed: ${event.error}`, {
+          position: "bottom-left",
+          autoClose: 3000,
+          theme: "dark",
+        });
+      }
+
+      setIsSpeaking(false);
+      setCurrentSpeakingIndex(null);
+    };
+
+    speechSynthesis.speak(utterance);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -243,9 +373,30 @@ const ChatUI = () => {
                 message.sender === "user"
                   ? "bg-gray-700 text-yellow-400 rounded-tr-none"
                   : "bg-gray-300 text-gray-900 rounded-tl-none"
-              } flex flex-col justify-start items-start rounded-xl`}
+              } flex flex-col justify-start items-start rounded-xl relative`}
             >
               {formatMessage(message.text)}
+              {message.sender === "ai" && (
+                <button
+                  onClick={() => handleSpeak(message.text, index)}
+                  className={`absolute right-2 top-2 p-1 rounded-full ${
+                    isSpeaking && currentSpeakingIndex === index
+                      ? "bg-yellow-500 text-gray-900"
+                      : "bg-gray-700 text-yellow-400"
+                  }`}
+                  aria-label={
+                    isSpeaking && currentSpeakingIndex === index
+                      ? "Stop speaking"
+                      : "Speak"
+                  }
+                >
+                  {isSpeaking && currentSpeakingIndex === index ? (
+                    <StopIcon className="h-4 w-4" />
+                  ) : (
+                    <SpeakerWaveIcon className="h-4 w-4" />
+                  )}
+                </button>
+              )}
             </div>
           </div>
         ))}

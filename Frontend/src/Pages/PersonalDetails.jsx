@@ -70,16 +70,12 @@ const PersonalDetails = () => {
       formData.append("gender", gender);
       formData.append("aiCompanionType", aiCompanionType);
 
-      const response = await AxiosInstance.post(
-        "/users/CreateUserInfo",
-        {
-          age,
-          gender,
-          AICompanion: aiCompanionType,
-          profilePic: profilePic || null,
-        },
-      
-      );
+      const response = await AxiosInstance.post("/users/CreateUserInfo", {
+        age,
+        gender,
+        AICompanion: aiCompanionType,
+        profilePic:  null,
+      });
 
       if (response.status === 200) {
         toast.success("Profile updated successfully!", {

@@ -17,6 +17,7 @@ const HomeProctector = ({ children }) => {
       try {
         const res = await AxiosInstance.get("/users/getUser");
         if (res.status === 200) {
+          localStorage.setItem("AICompanion", res.data.data.AICompanion);
           setTimeout(() => {
             setIsLoading(false);
           }, 3000);
