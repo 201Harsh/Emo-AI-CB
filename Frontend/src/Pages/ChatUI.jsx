@@ -24,7 +24,7 @@ const ChatUI = () => {
         // Load chat history
         const savedChatHistory = localStorage.getItem("chat_history");
         if (savedChatHistory) {
-          setChatHistorySave(JSON.parse(savedChatHistory));
+          setchatHistorySave(JSON.parse(savedChatHistory));
         }
       } catch (error) {
         console.error("Error loading chat data from localStorage:", error);
@@ -55,11 +55,6 @@ const ChatUI = () => {
             "chat_messages",
             JSON.stringify(limitedMessages)
           );
-        }
-
-        if (chatHistorySave.length > 0) {
-          const limitedHistory = chatHistorySave.slice(-50);
-          localStorage.setItem("chat_history", JSON.stringify(limitedHistory));
         }
       } catch (error) {
         console.error("Error saving chat data to localStorage:", error);
@@ -94,6 +89,7 @@ const ChatUI = () => {
       });
 
       if (response.status === 200) {
+        setIsRes(true);
         const aiMessage = {
           sender: "ai",
           text: response.data.response,
