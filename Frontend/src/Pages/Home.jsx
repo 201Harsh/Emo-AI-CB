@@ -49,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -262,7 +262,7 @@ const Home = () => {
                 >
                   <div className="relative inline-block">
                     <motion.h1
-                      className="font-bold text-4xl text-gray-200 md:text-6xl flex items-center justify-center gap-2 mb-6"
+                      className="font-bold text-4xl text-gray-100 md:text-6xl flex items-center justify-center gap-2 mb-6"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
@@ -303,7 +303,7 @@ const Home = () => {
                   </div>
 
                   <motion.h2
-                    className="text-2xl md:text-3xl font-medium text-gray-300 mb-12"
+                    className="text-2xl md:text-3xl font-medium text-gray-200 mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.9, duration: 0.6 }}
@@ -323,8 +323,8 @@ const Home = () => {
                         repeatType: "reverse",
                       }}
                     >
-                      <span className="text-yellow-400">Harsh's</span> EmoAI
-                       is ready to assist you!
+                      <span className="text-yellow-400">Harsh's</span> EmoAI is
+                      ready to assist you!
                     </motion.span>
                   </motion.h2>
                 </motion.div>
@@ -342,19 +342,19 @@ const Home = () => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{
                         opacity: activeFeature === index ? 1 : 0,
-                        x: activeFeature === index ? 0 : 50,
+                        x: activeFeature === index ? 0 : 0,
                         zIndex: activeFeature === index ? 1 : 0,
                       }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.6 }}
                     >
                       <div className="flex flex-col items-center text-center h-full justify-center">
-                        <motion.span className="text-4xl mb-4">
+                        <motion.span className="text-5xl mb-4">
                           {feature.icon}
                         </motion.span>
                         <h3 className="text-xl font-bold text-yellow-400 mb-2">
                           {feature.title}
                         </h3>
-                        <p className="text-gray-300">{feature.description}</p>
+                        <p className="text-gray-200">{feature.description}</p>
                       </div>
                     </motion.div>
                   ))}
