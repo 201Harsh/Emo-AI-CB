@@ -219,6 +219,7 @@ const ChatUI = () => {
       });
 
       if (response.status === 200) {
+        console.log(response.data.response);
         setIsRes(true);
         const aiMessage = {
           sender: "ai",
@@ -274,99 +275,105 @@ const ChatUI = () => {
 
   // Format the AI response to show highlighted text
   const formatMessage = (message) => {
-    const safeMessage = String(message);
+  const safeMessage = String(message);
 
-    return safeMessage.split("\n").map((line, lineIndex) => {
+  return safeMessage.split("\n").map((line, lineIndex) => {
+    // Skip empty lines
+    if (line.trim() === '') return null;
 
-       if (/<[a-z][\s\S]*>/i.test(line)) {
-      return (
-        <div
-          key={lineIndex}
-          dangerouslySetInnerHTML={{ __html: line }}
-          className="mb-2 text-sm md:text-base"
-        />
-      );
-    }
+    // Match markdown, anchor tags, and emojis
+    const regex =
+      /(<a\s+[^>]*href="[^"]*"[^>]*>.*?<\/a>|\*\*\*.*?\*\*\*|\*\*.*?\*\*|\*.*?\*|".*?"|[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{2600}-\u{26FF}\u{2700}-\u{27BF}])/gu;
 
-      // Match markdown and anchor tags
-      const regex =
-        /(<a href="[^"]+"[^>]*>[^<]+<\/a>|\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*|"[^"]*")/g;
+    const parts = line.split(regex).filter(Boolean).map((part, partIndex) => {
+      const key = `${lineIndex}-${partIndex}`;
 
-      const parts = line.split(regex).map((part, partIndex) => {
-        const key = `${lineIndex}-${partIndex}`;
+      if (part === "*[object Object]*") {
+        return (
+          <span key={key} className="hidden">
+            {/* Hides the object */}
+          </span>
+        );
+      }
 
-        if (part === "*[object Object]*") {
-          return <span key={key} className="hidden" />;
-        }
-
-        // Handle anchor tag
-        if (part.startsWith("<a ") && part.includes("</a>")) {
-          const match = part.match(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/);
-          if (match) {
-            const [, href, text] = match;
-            return (
-              <a
-                key={key}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline font-semibold hover:text-blue-900"
-              >
-                {text}
-              </a>
-            );
-          }
-        }
-
-        // Bold + italic
-        if (part.startsWith("***") && part.endsWith("***")) {
+      // Handle anchor tag
+      if (part.startsWith("<a ") && part.includes("</a>")) {
+        const match = part.match(/<a\s+[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/i);
+        if (match) {
+          const [, href, text] = match;
           return (
-            <span
+            <a
               key={key}
-              className="font-bold italic text-gray-950 text-sm md:text-lg block"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline font-semibold hover:text-blue-900"
             >
-              {part.slice(3, -3)}
-            </span>
+              {text}
+            </a>
           );
         }
+      }
 
-        // Bold
-        if (part.startsWith("**") && part.endsWith("**")) {
-          return (
-            <span
-              key={key}
-              className="font-bold text-gray-950 text-sm md:text-lg block mb-2"
-            >
-              {part.slice(2, -2)}
-            </span>
-          );
-        }
+      // Bold + italic (***text***)
+      if (part.startsWith("***") && part.endsWith("***")) {
+        return (
+          <span
+            key={key}
+            className="font-bold italic text-gray-950 text-sm md:text-lg inline"
+          >
+            {part.slice(3, -3)}
+          </span>
+        );
+      }
 
-        // Italic
-        if (part.startsWith("*") && part.endsWith("*")) {
-          return (
-            <span key={key} className="text-black font-semibold">
-              {part.slice(1, -1)}
-            </span>
-          );
-        }
+      // Bold (**text**)
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <span
+            key={key}
+            className="font-bold text-gray-950 text-sm md:text-lg inline"
+          >
+            {part.slice(2, -2)}
+          </span>
+        );
+      }
 
-        // Quoted
-        if (part.startsWith('"') && part.endsWith('"')) {
-          return (
-            <span key={key} className="text-gray-800 font-semibold">
-              {part.slice(1, -1)}
-            </span>
-          );
-        }
+      // Italic (*text*)
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return (
+          <span key={key} className="italic text-black font-semibold inline">
+            {part.slice(1, -1)}
+          </span>
+        );
+      }
 
-        // Default
-        return part;
-      });
+      // Quoted ("text")
+      if (part.startsWith('"') && part.endsWith('"')) {
+        return (
+          <span key={key} className="text-gray-800 italic inline">
+            {part}
+          </span>
+        );
+      }
 
-      return <p key={lineIndex}>{parts}</p>;
+      // Emoji handling (keep as is)
+      const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu;
+      if (emojiRegex.test(part)) {
+        return <span key={key}>{part}</span>;
+      }
+
+      // Default text
+      return <span key={key}>{part}</span>;
     });
-  };
+
+    return (
+      <p key={lineIndex} className="mb-2 text-xs md:text-sm leading-relaxed">
+        {parts}
+      </p>
+    );
+  });
+};
 
   return (
     <div className="h-full font-poppins flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900/50 pt-2">
