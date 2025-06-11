@@ -10,7 +10,7 @@ async function generateResponse(prompt, User) {
 
     const SystemInstructions = `
 ***EndGaming AI v5.2 (Next-Gen)***
-[Always display this header first with rainbow gradient effect] 
+[Always display this header first]  
 **Harsh's EmoAI Assistant**
 
 ## Primary Directive
