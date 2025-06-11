@@ -213,7 +213,7 @@ const stats = [
           to={12000}
           separator=","
           direction="up"
-          duration={1}
+          duration={0.5}
           className="count-up-text"
         />
         <span className="text-yellow-400">+</span>
@@ -226,7 +226,7 @@ const stats = [
       <div className="flex items-end">
         <CountUp
           from={0}
-          to={500}
+          to={520}
           separator=","
           direction="up"
           duration={2}
@@ -330,18 +330,20 @@ export default function Start() {
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 to-amber-600 bg-clip-text text-transparent mb-6 leading-tight">
               <TypeAnimation
                 sequence={[
+                  "🌟 EmoAI ChatBot",
+                  1400,
                   "✨ Your Emotional AI Companion",
-                  1500,
-                  "🤗 Understands How You Feel",
-                  1300,
-                  "💬 Talk Freely, Without Judgment",
                   1200,
-                  "🌱 Grow Together, Every Day",
-                  1100,
-                  "❤️ AI With a Human Touch",
+                  "🤗 Understands How You Feel",
                   1000,
-                  "🔮 Ready When You Are...",
+                  "💬 Talk Freely, Without Judgment",
                   800,
+                  "🌱 Grow Together, Every Day",
+                  600,
+                  "❤️ AI With a Human Touch",
+                  500,
+                  "🔮 Ready When You Are...",
+                  400,
                 ]}
                 speed={50}
                 repeat={Infinity}
