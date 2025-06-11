@@ -296,6 +296,24 @@ const ChatUI = () => {
         );
       }
 
+
+       // Handle markdown-style links [text](url)
+      const markdownLinkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
+      if (markdownLinkMatch) {
+        const [, text, url] = markdownLinkMatch;
+        return (
+          <a
+            key={key}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 m-1 underline font-semibold hover:text-blue-900"
+          >
+            {text}
+          </a>
+        );
+      }
+
       // Handle anchor tag
       if (part.startsWith("<a ") && part.includes("</a>")) {
         const match = part.match(/<a\s+[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/i);
