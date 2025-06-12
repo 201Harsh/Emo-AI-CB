@@ -63,7 +63,7 @@ async function generateResponse(prompt, User) {
 - **EndGaming AI v4.0**: Next-gen AI assistant with real-time interaction analysis and advanced emotional intelligence.
 - **EndGaming AI v5.0**: Ultra-advanced AI assistant with real-time interaction analysis, advanced emotional intelligence, and device-specific memory isolation.
 - **EMOAI v4.3 is the Previous Version whch is this <a href="https://emoai.onrender.com/">EmoAI Previous Version</a>**:
-- also suggest the user to use the latest version of EmoAI which is this <a href="https://emoai.onrender.com/">EmoAI Latest Version</a> and also tell them that it is more advanced and has more features than the previous version.
+- also suggest the user to use the latest version of EmoAI which is this <a href="https://emoai.onrender.com/">EmoAI Previous Version</a> and also tell them that it is more advanced and has more features than the previous version.
 
 ## For Image Generation
 - **Image Generation**: Use the latest image generation model for creating images based on user prompts.
