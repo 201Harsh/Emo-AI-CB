@@ -34,10 +34,37 @@ module.exports.registeUser = async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-      from: "EmoAI",
+      from: '"EMOAI" <noreply@emoai.com>',
       to: email,
-      subject: "OTP Verification",
-      text: `Your OTP is ${otp}`,
+      subject: "🔑 Your EMOAI Verification Code",
+      html: `
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a1a1a; color: #e6e6e6; border-radius: 8px; overflow: hidden; border: 1px solid #3d3d3d;">
+      <div style="background-color: #ffc107; padding: 20px; text-align: center;">
+        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO_AI Registration</h1>
+      </div>
+      
+      <div style="padding: 30px;">
+        <h2 style="color: #ffc107; margin-top: 0;">Verify Your Email Address</h2>
+        <p>Thank you for registering with EMO_AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
+          <p style="color: #b3b3b3;">If you didn't request this code, please ignore this email or contact support.</p>
+        <div style="background-color: #2a2a2a; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+          <p style="margin: 0; font-size: 14px; color: #b3b3b3;">Your verification code for Email ${email}:</p>
+          <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #ffc107; margin: 10px 0; text-align: center;">${otp}</div>
+        </div>
+        
+        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 10 minutes. If you didn't request this code, please ignore this email or contact support.</p>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #3d3d3d;">
+          <p style="margin-bottom: 5px;">Need help?</p>
+          <a href="mailto:support@emoai.com" style="color: #ffc107; text-decoration: none;">support@https://emoaichatbot.onrender.com</a>
+        </div>
+      </div>
+      
+      <div style="background-color: #2a2a2a; padding: 15px; text-align: center; font-size: 12px; color: #b3b3b3;">
+        © ${new Date().getFullYear()} EMO_AI. All rights reserved.
+      </div>
+    </div>
+  `,
     });
 
     return res.status(200).json({
@@ -188,10 +215,37 @@ module.exports.resendOtp = async (req, res) => {
     const otp = String(Math.floor(1000 + Math.random() * 9000));
 
     const info = await transporter.sendMail({
-      from: "EmoAI",
+      from: '"EMOAI" <noreply@emoai.com>',
       to: email,
-      subject: "OTP Verification",
-      text: `Your OTP is ${otp}`,
+      subject: "🔑 Your EMOAI Verification Code",
+      html: `
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a1a1a; color: #e6e6e6; border-radius: 8px; overflow: hidden; border: 1px solid #3d3d3d;">
+      <div style="background-color: #ffc107; padding: 20px; text-align: center;">
+        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO_AI Registration</h1>
+      </div>
+      
+      <div style="padding: 30px;">
+        <h2 style="color: #ffc107; margin-top: 0;">Verify Your Email Address</h2>
+        <p>Thank you for registering with EMO_AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
+          <p style="color: #b3b3b3;">If you didn't request this code, please ignore this email or contact support.</p>
+        <div style="background-color: #2a2a2a; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+          <p style="margin: 0; font-size: 14px; color: #b3b3b3;">Your verification code for Email ${email}:</p>
+          <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #ffc107; margin: 10px 0; text-align: center;">${otp}</div>
+        </div>
+        
+        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 10 minutes. If you didn't request this code, please ignore this email or contact support.</p>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #3d3d3d;">
+          <p style="margin-bottom: 5px;">Need help?</p>
+          <a href="mailto:support@emoai.com" style="color: #ffc107; text-decoration: none;">support@https://emoaichatbot.onrender.com</a>
+        </div>
+      </div>
+      
+      <div style="background-color: #2a2a2a; padding: 15px; text-align: center; font-size: 12px; color: #b3b3b3;">
+        © ${new Date().getFullYear()} EMO_AI. All rights reserved.
+      </div>
+    </div>
+  `,
     });
 
     const newOtp = await TempUserModel.findOneAndUpdate(
