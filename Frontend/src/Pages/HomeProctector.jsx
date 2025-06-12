@@ -20,7 +20,7 @@ const HomeProctector = ({ children }) => {
           localStorage.setItem("AICompanion", res.data.data.AICompanion);
           setTimeout(() => {
             setIsLoading(false);
-          }, 3000);
+          }, 4000);
         } else {
           localStorage.clear();
           Navigate("/login");
