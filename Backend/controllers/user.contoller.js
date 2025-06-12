@@ -34,7 +34,7 @@ module.exports.registeUser = async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-      from: '"EMOAI" <noreply@emoai.com>',
+      from: process.env.SENDERS_EMAIL, // Sender address
       to: email,
       subject: "🔑 Your EMOAI Verification Code",
       html: `
@@ -52,7 +52,7 @@ module.exports.registeUser = async (req, res) => {
           <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #ffc107; margin: 10px 0; text-align: center;">${otp}</div>
         </div>
         
-        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 10 minutes. If you didn't request this code, please ignore this email or contact support.</p>
+        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 5 minutes. If you didn't request this code, please ignore this email or contact support.</p>
         
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #3d3d3d;">
           <p style="margin-bottom: 5px;">Need help?</p>
@@ -215,7 +215,7 @@ module.exports.resendOtp = async (req, res) => {
     const otp = String(Math.floor(1000 + Math.random() * 9000));
 
     const info = await transporter.sendMail({
-      from: '"EMOAI" <noreply@emoai.com>',
+      from: process.env.SENDERS_EMAIL, // Sender address
       to: email,
       subject: "🔑 Your EMOAI Verification Code",
       html: `
@@ -233,7 +233,7 @@ module.exports.resendOtp = async (req, res) => {
           <div style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #ffc107; margin: 10px 0; text-align: center;">${otp}</div>
         </div>
         
-        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 10 minutes. If you didn't request this code, please ignore this email or contact support.</p>
+        <p style="font-size: 14px; color: #b3b3b3;">This code will expire in 5 minutes. If you didn't request this code, please ignore this email or contact support.</p>
         
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #3d3d3d;">
           <p style="margin-bottom: 5px;">Need help?</p>
