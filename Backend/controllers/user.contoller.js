@@ -18,7 +18,7 @@ module.exports.registeUser = async (req, res) => {
 
     if (isUserExists) {
       return res.status(400).json({
-        message: "User already exists",
+        message: "User already exists with this email",
       });
     }
 
@@ -97,7 +97,7 @@ module.exports.verifyUser = async (req, res) => {
       });
 
       return res.status(200).json({
-        message: "User verified successfully",
+        message: "Account verified successfully",
         data: NewUser,
         token: token,
       });
@@ -145,7 +145,7 @@ module.exports.loginUser = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "User logged in successfully",
+      message: "logged in successfully",
       data: User,
       token: token,
     });
@@ -168,7 +168,7 @@ module.exports.logoutUser = async (req, res) => {
     res.clearCookie("token");
 
     return res.status(200).json({
-      message: "User logged out successfully",
+      message: "logged out successfully",
     });
   } catch (error) {
     res.status(500).json({
@@ -184,7 +184,7 @@ module.exports.getUser = async (req, res) => {
     const User = await userModel.findById(user.id);
 
     return res.status(200).json({
-      message: "User found successfully",
+      message: "User found",
       data: User,
     });
   } catch (error) {
@@ -297,7 +297,7 @@ module.exports.getUserInfo = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "User details updated successfully",
+      message: "Profile updated",
       data: userDeatils,
     });
   } catch (error) {
