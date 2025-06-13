@@ -52,7 +52,7 @@ const PopUp = ({ isOpen, onClose, title, message, buttons = [], children }) => {
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={onClose}
-                      className="bg-transparent border border-gray-500 text-gray-300 hover:bg-gray-700 hover:border-gray-400 font-medium py-2 px-5 rounded-lg text-sm transition-colors"
+                      className="bg-transparent cursor-pointer border border-gray-500 text-gray-300 hover:bg-gray-700 hover:border-gray-400 font-medium py-2 px-5 rounded-lg text-sm transition-colors"
                     >
                       Follow Later
                     </motion.button>
@@ -63,7 +63,7 @@ const PopUp = ({ isOpen, onClose, title, message, buttons = [], children }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <button onClick={onClose} className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white font-medium py-2 px-5 rounded-lg text-sm shadow-md hover:shadow-lg transition-all">
+                      <button onClick={onClose} className="bg-gradient-to-r cursor-pointer from-amber-500 to-yellow-600 text-white font-medium py-2 px-5 rounded-lg text-sm shadow-md hover:shadow-lg transition-all">
                         Follow Me
                       </button>
                     </motion.a>
