@@ -410,14 +410,14 @@ export default function Start() {
 
           {/* AI Companion Section */}
           <motion.div
-            className="mt-20 relative bg-gray-800 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto border border-gray-700"
+            className="mt-20 relative bg-gray-800 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto border-2 border-yellow-400"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
             <div className="absolute inset-0 rounded-3xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-600/10 backdrop-blur-sm" />
-              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
+              <div className="absolute inset-0 bg-[#192333]" />
             </div>
 
             <h3 className="text-3xl text-yellow-400 font-bold mb-6 relative z-10">
@@ -448,7 +448,7 @@ export default function Start() {
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="flex items-start space-x-4"
+                  className="flex border border-yellow-400 p-4 rounded-2xl items-start space-x-4"
                   whileHover={{ y: -5 }}
                 >
                   <div className="p-2 rounded-lg bg-gray-700/50 border border-gray-600">
