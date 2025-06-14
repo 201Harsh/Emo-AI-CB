@@ -1,4 +1,4 @@
-# 🤖 EmoAI ChatBot (MERN + EndGaming AI) [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+# 🤖 EmoAI ChatBot Next-Gen (MERN + EndGaming AI) [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 Now upgraded to its next-gen version, this AI-powered chatbot web application is built on the MERN stack (MongoDB, Express.js, React.js, Node.js) and seamlessly integrates the Endgaming AI API. Users can register, log in, and engage with an intelligent, adaptive chatbot—enhanced by a credit-based system to manage API usage effectively.
 
@@ -34,14 +34,14 @@ An AI-powered chatbot web application with emotional intelligence, built using t
 
 ## 🌟 Key Features
 
-| Feature                   | Description                                                 |
-| ------------------------- | ----------------------------------------------------------- |
-| 🧠 **AI-Powered Chat**    | Integration with EndGaming AI for intelligent conversations |
-| 🔒 **JWT Authentication** | Secure user authentication with token refresh               |
-| 💳 **Credit System**      | Usage-based credit management (1 credit/request)            |
-| 🎭 **Emotion Adaptation** | Dynamic responses based on detected user mood               |
-| 📊 **User Analytics**     | Track usage patterns and credit consumption                 |
-| ⚡ **Real-Time UI**       | Interactive chat interface with React                       |
+| Feature                   | Description                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| 🧠 **AI-Powered Chat**    | Integration with EndGaming AI for intelligent conversations With Next-Gen AI |
+| 🔒 **JWT Authentication** | Secure user authentication with token refresh                                |
+| 💳 **Credit System**      | Usage-based credit management (1 credit/request)                             |
+| 🎭 **Emotion Adaptation** | Dynamic responses based on detected user mood                                |
+| 📊 **User Analytics**     | Track usage patterns and credit consumption                                  |
+| ⚡ **Real-Time UI**       | Interactive chat interface with React                                        |
 
 ### Emotion Response Matrix
 
@@ -50,6 +50,24 @@ An AI-powered chatbot web application with emotional intelligence, built using t
 | 😠 Angry     | Calm + Solution-Oriented | "Let's work through this together..." |
 | 😔 Sad       | Empathetic + Encouraging | "I'm here to listen..."               |
 | 😃 Happy     | Enthusiastic + Playful   | "That's fantastic! 🎉..."             |
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
+
+![Tailwind](https://img.shields.io/badge/-Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white)
+
+![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white)
+
+**Backend**
+
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node-dot-js&logoColor=white)
+
+---
 
 ## 🌈 Emotional Response System
 
@@ -344,8 +362,9 @@ SOFTWARE.
 ---
 
 # Live Preview
- - see the site live at
-*https://emoaichatbot.onrender.com/*
+
+- see the site live at
+  *https://emoaichatbot.onrender.com/*
 
 ---
 
