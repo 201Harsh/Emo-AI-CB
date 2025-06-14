@@ -259,6 +259,7 @@ export default function Start() {
     const handleStartServer = async () => {
       const res = await AxiosInstance.get("/users/startServer");
       console.log(res.data.message);
+      console.log(res.data.data.status);
     };
     handleStartServer();
   }, []);
