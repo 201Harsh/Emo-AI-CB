@@ -47,13 +47,13 @@ const AutoRedirect = () => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     const timer = setTimeout(() => {
-      // setShowPreloader(false);
+      setShowPreloader(false);
       if (token) {
         navigate("/home");
       } else {
-        // setIstoken(true);
+        setIstoken(true);
       }
-    }, 300); // Optional delay to show the preloader
+    }, 1000); // Optional delay to show the preloader
 
     return () => clearTimeout(timer);
   }, [navigate, token]);
