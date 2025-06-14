@@ -408,60 +408,102 @@ export default function Start() {
             </div>
           </motion.div>
 
-          {/* AI Companion Section */}
+          {/* AI Companion Section - Mobile Vertical & Desktop Grid */}
           <motion.div
-            className="mt-20 relative bg-gray-800 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto border-2 border-yellow-400"
+            className="mt-12 md:mt-20 relative bg-gray-800 p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl max-w-7xl mx-auto border border-yellow-400 md:border-2 overflow-hidden"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="absolute inset-0 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-600/10 backdrop-blur-sm" />
-              <div className="absolute inset-0 bg-[#192333]" />
+            {/* Background Layers */}
+            <div className="absolute inset-0 rounded-2xl md:rounded-3xl overflow-hidden z-0">
+              <div className="absolute inset-0 bg-[#192333] opacity-95" />
+              <div className="absolute inset-0 bg-[#192333] backdrop-blur-[1px]" />
+              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
             </div>
 
-            <h3 className="text-3xl text-yellow-400 font-bold mb-6 relative z-10">
-              Your Perfect AI Companion
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left relative z-10">
-              {[
-                {
-                  icon: HeartIcon,
-                  title: "Emotional Support",
-                  desc: "Talk, share, and feel cared for with AI that listens deeply and responds with genuine empathy.",
-                },
-                {
-                  icon: HandThumbUpIcon,
-                  title: "Professional Coach",
-                  desc: "Get career advice, productivity tips, and professional development guidance tailored to your goals.",
-                },
-                {
-                  icon: FaceSmileIcon,
-                  title: "Mental Wellness",
-                  desc: "Daily check-ins, mindfulness exercises, and cognitive behavioral techniques to support your mental health.",
-                },
-                {
-                  icon: SparklesIcon,
-                  title: "Creative Partner",
-                  desc: "Brainstorm ideas, overcome writer's block, and explore creative possibilities with an inspiring collaborator.",
-                },
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  className="flex border border-yellow-400 p-4 rounded-2xl items-start space-x-4"
-                  whileHover={{ y: -5 }}
+            {/* Content Container */}
+            <div className="relative z-10 space-y-6 md:space-y-8">
+              {/* Header Section */}
+              <div className="text-center">
+                <div className="inline-flex items-center mb-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30">
+                  <SparklesIcon className="h-3 w-3 md:h-4 md:w-4 text-yellow-400 mr-1 md:mr-2" />
+                  <span className="text-xs font-semibold text-yellow-400">
+                    NEXT-GEN AI
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl text-yellow-400 font-bold mb-2 md:mb-3">
+                  Your Perfect AI Companion
+                </h3>
+                <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto px-2 sm:px-0">
+                  Experience AI that thinks, learns, and grows with you —
+                  understanding context, adapting dynamically, and evolving
+                  through every interaction.
+                </p>
+              </div>
+
+              {/* Features Grid - Single column on mobile, 2 columns on desktop */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                {[
+                  {
+                    icon: HeartIcon,
+                    title: "Emotional Support",
+                    desc: "Talk, share, and feel cared for with AI that listens deeply and responds with genuine empathy.",
+                    gradient: "from-pink-500/10 to-rose-600/10",
+                  },
+                  {
+                    icon: HandThumbUpIcon,
+                    title: "Professional Coach",
+                    desc: "Get career advice, productivity tips, and professional development guidance tailored to your goals.",
+                    gradient: "from-blue-500/10 to-indigo-600/10",
+                  },
+                  {
+                    icon: FaceSmileIcon,
+                    title: "Mental Wellness",
+                    desc: "Daily check-ins, mindfulness exercises, and cognitive behavioral techniques to support your mental health.",
+                    gradient: "from-green-500/10 to-emerald-600/10",
+                  },
+                  {
+                    icon: SparklesIcon,
+                    title: "Creative Partner",
+                    desc: "Brainstorm ideas, overcome writer's block, and explore creative possibilities with an inspiring collaborator.",
+                    gradient: "from-purple-500/10 to-violet-600/10",
+                  },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="relative group overflow-hidden rounded-xl md:rounded-2xl border border-gray-700 hover:border-yellow-400/50 transition-all"
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-30 group-hover:opacity-50 transition-opacity`}
+                    />
+                    <div className="relative p-4 sm:p-5 flex items-start rounded-2xl space-x-3 sm:space-x-4 bg-gray-900/30 backdrop-blur-sm">
+                      <div className="p-2 sm:p-3 rounded-lg md:rounded-xl bg-gray-800/50 border border-gray-700 group-hover:bg-yellow-400/10 group-hover:border-yellow-400/30 transition-all">
+                        <item.icon className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 group-hover:scale-110 transition-transform" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg sm:text-xl text-yellow-400 font-semibold mb-1 sm:mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Footer */}
+              <div className="pt-4 md:pt-6 text-center">
+                <Link
+                  to="/authprompt"
+                  className="px-6 py-2 sm:px-8 sm:py-3 rounded-full bg-yellow-400 text-gray-900 font-bold hover:bg-yellow-300 transition-colors shadow-md md:shadow-lg hover:shadow-yellow-400/20 text-sm sm:text-base"
                 >
-                  <div className="p-2 rounded-lg bg-gray-700/50 border border-gray-600">
-                    <item.icon className="h-6 w-6 text-yellow-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl text-yellow-400 font-semibold mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-300">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+                  Start Your AI Journey
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
