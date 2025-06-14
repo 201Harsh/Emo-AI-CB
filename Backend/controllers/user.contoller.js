@@ -36,16 +36,16 @@ module.exports.registeUser = async (req, res) => {
     const info = await transporter.sendMail({
       from: process.env.SENDERS_EMAIL, // Sender address
       to: email,
-      subject: "🔑 Your EMOAI Verification Code",
+      subject: "🔑 Your EMO AI Verification Code",
       html: `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a1a1a; color: #e6e6e6; border-radius: 8px; overflow: hidden; border: 1px solid #3d3d3d;">
       <div style="background-color: #ffc107; padding: 20px; text-align: center;">
-        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO_AI Registration</h1>
+        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO AI Registration</h1>
       </div>
       
       <div style="padding: 30px;">
         <h2 style="color: #ffc107; margin-top: 0;">Verify Your Email Address</h2>
-        <p>Thank you for registering with EMO_AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
+        <p>Thank you for registering with EMO AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
           <p style="color: #b3b3b3;">If you didn't request this code, please ignore this email or contact support.</p>
         <div style="background-color: #2a2a2a; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
           <p style="margin: 0; font-size: 14px; color: #b3b3b3;">Your verification code for Email ${email}:</p>
@@ -61,7 +61,7 @@ module.exports.registeUser = async (req, res) => {
       </div>
       
       <div style="background-color: #2a2a2a; padding: 15px; text-align: center; font-size: 12px; color: #b3b3b3;">
-        © ${new Date().getFullYear()} EMO_AI. All rights reserved.
+        © ${new Date().getFullYear()} EMO AI. All rights reserved.
       </div>
     </div>
   `,
@@ -217,16 +217,16 @@ module.exports.resendOtp = async (req, res) => {
     const info = await transporter.sendMail({
       from: process.env.SENDERS_EMAIL, // Sender address
       to: email,
-      subject: "🔑 Your EMOAI Verification Code",
+      subject: "🔑 Your EMO AI Verification Code",
       html: `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a1a1a; color: #e6e6e6; border-radius: 8px; overflow: hidden; border: 1px solid #3d3d3d;">
       <div style="background-color: #ffc107; padding: 20px; text-align: center;">
-        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO_AI Registration</h1>
+        <h1 style="color: #1a1a1a; margin: 0; font-size: 24px; font-weight: 600;">EMO AI Registration</h1>
       </div>
       
       <div style="padding: 30px;">
         <h2 style="color: #ffc107; margin-top: 0;">Verify Your Email Address</h2>
-        <p>Thank you for registering with EMO_AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
+        <p>Thank you for registering with EMO AI. To complete your registration, please enter the following One-Time Password (OTP) in the verification page:</p>
           <p style="color: #b3b3b3;">If you didn't request this code, please ignore this email or contact support.</p>
         <div style="background-color: #2a2a2a; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
           <p style="margin: 0; font-size: 14px; color: #b3b3b3;">Your verification code for Email ${email}:</p>
@@ -242,7 +242,7 @@ module.exports.resendOtp = async (req, res) => {
       </div>
       
       <div style="background-color: #2a2a2a; padding: 15px; text-align: center; font-size: 12px; color: #b3b3b3;">
-        © ${new Date().getFullYear()} EMO_AI. All rights reserved.
+        © ${new Date().getFullYear()} EMO AI. All rights reserved.
       </div>
     </div>
   `,
