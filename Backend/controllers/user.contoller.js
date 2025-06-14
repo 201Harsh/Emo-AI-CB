@@ -309,7 +309,10 @@ module.exports.getUserInfo = async (req, res) => {
 module.exports.startServer = async (req, res) => {
   try {
     return res.status(200).json({
-      message: "Welcome to EmoAI Server",
+      message: "Welcome to EmoAI Server 🚀",
+      data: {
+        status: "Server is running",
+      },
     });
   } catch (error) {
     res.status(500).json({
