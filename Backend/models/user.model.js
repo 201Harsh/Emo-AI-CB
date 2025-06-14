@@ -27,9 +27,6 @@ const userSchema = new mongoose.Schema({
   AICompanion: {
     type: String,
   },
-  profilePic: {
-    type: String,
-  },
 });
 
 userSchema.methods.jwtToken = function () {

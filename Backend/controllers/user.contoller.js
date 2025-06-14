@@ -276,7 +276,7 @@ module.exports.getUserInfo = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { age, gender, AICompanion, profilePic } = req.body;
+    const { age, gender, AICompanion } = req.body;
 
     const userId = req.user;
 
@@ -292,7 +292,6 @@ module.exports.getUserInfo = async (req, res) => {
       age,
       gender,
       AICompanion,
-      profilePic,
     });
 
     return res.status(200).json({

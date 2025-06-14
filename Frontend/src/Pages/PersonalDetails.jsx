@@ -74,7 +74,6 @@ const PersonalDetails = () => {
         age,
         gender,
         AICompanion: aiCompanionType,
-        profilePic:  null,
       });
 
       if (response.status === 200) {
