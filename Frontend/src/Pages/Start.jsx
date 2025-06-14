@@ -330,20 +330,22 @@ export default function Start() {
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 to-amber-600 bg-clip-text text-transparent mb-6 leading-tight">
               <TypeAnimation
                 sequence={[
-                  "🌟 EmoAI ChatBot",
+                  "🌟 Emo AI Next-Gen",
                   1400,
                   "✨ Your Emotional AI Companion",
                   1200,
                   "🤗 Understands How You Feel",
                   1000,
-                  "💬 Talk Freely, Without Judgment",
+                  "💬 Safe Space for Honest Conversations",
+                  900,
+                  "🌱 Let's Grow Together",
                   800,
-                  "🌱 Grow Together, Every Day",
-                  600,
                   "❤️ AI With a Human Touch",
+                  700,
+                  "🔮 Ask Me Anything...",
+                  600,
+                  "🌟 Reconnecting with You...",
                   500,
-                  "🔮 Ready When You Are...",
-                  400,
                 ]}
                 speed={50}
                 repeat={Infinity}
