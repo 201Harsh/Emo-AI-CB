@@ -121,7 +121,6 @@ const Home = () => {
     const handleStartServer = async () => {
       const res = await AxiosInstance.get("/users/startServer");
 
-      console.log(res.data.message);
     };
     handleStartServer();
   }, []);

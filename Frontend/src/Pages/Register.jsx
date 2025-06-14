@@ -146,7 +146,6 @@ const Register = () => {
         });
       }
     } catch (error) {
-      console.log(error);
       const errors = error.response?.data?.errors;
       if (Array.isArray(errors)) {
         errors.forEach((err) => {

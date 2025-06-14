@@ -219,7 +219,6 @@ const ChatUI = () => {
       });
 
       if (response.status === 200) {
-        console.log(response.data.response);
         setIsRes(true);
         const aiMessage = {
           sender: "ai",

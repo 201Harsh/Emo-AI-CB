@@ -262,7 +262,6 @@ module.exports.resendOtp = async (req, res) => {
       newOtp,
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({
       error: error.message,
     });
