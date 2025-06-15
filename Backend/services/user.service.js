@@ -48,7 +48,6 @@ module.exports.CreateUserInfo = async ({
   age,
   gender,
   AICompanion,
-  profilePic,
 }) => {
   if (!age || !gender || !AICompanion) {
     throw new Error("All fields are required");
@@ -60,7 +59,6 @@ module.exports.CreateUserInfo = async ({
       age,
       gender,
       AICompanion,
-      profilePic,
     }
   );
 
