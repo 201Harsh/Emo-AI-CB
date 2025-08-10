@@ -195,4 +195,4 @@ See [LICENSE](./LICENSE) for details.
 
 ---
 
-**Made with ❤️ by Harsh**
+**Made with ❤️ & ☕ by Harsh**
