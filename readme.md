@@ -23,7 +23,6 @@ It features **emotional intelligence**, **credit-based usage control**, and **pe
 | 🧠 **AI-Powered Chat** | Real-time intelligent conversations with EndGaming AI |
 | 🎭 **Emotion Adaptation** | Responses change based on user mood |
 | 🔒 **JWT Authentication** | Secure login & token refresh |
-| 💳 **Credit System** | Manage API usage with credits |
 | 📊 **User Analytics** | Track usage patterns & credit consumption |
 | ⚡ **Real-Time UI** | Smooth chat interface with React & Tailwind |
 
@@ -63,7 +62,6 @@ flowchart TD
     B --> E[Credit Service]
     C --> F[(MongoDB Users)]
     D --> G[AI Provider]
-    E --> H[(MongoDB Credits)]
 ```
 
 ---
@@ -82,15 +80,15 @@ Make sure you have:
 
 #### Clone Repository
 ```bash
-git clone https://github.com/201Harsh/AI-CB.git
-cd AI-CB
+git clone https://github.com/201Harsh/Emo-AI-CB.git
+cd Emo-AI-CB
 ```
 
 #### Backend Setup
 ```bash
 cd Backend
 npm install
-cp .env.example .env
+cp .env
 # Add your MongoDB URI & API keys in .env
 npm run dev
 ```
@@ -98,6 +96,7 @@ npm run dev
 #### Frontend Setup
 ```bash
 cd ../Frontend
+cp .env
 npm install
 npm run dev
 ```
@@ -107,7 +106,6 @@ npm run dev
 ## ⚡ Usage
 1. **Register** for a new account.  
 2. **Login** to access the chatbot.  
-3. Each user starts with **free credits** (configurable in `.env`).  
 4. Ask your questions — each consumes **1 credit**.  
 5. When credits run out, you’ll need to **refill**.
 
@@ -129,31 +127,12 @@ app.post("/api/chat", async (req, res) => {
 
 ---
 
-## 💳 Credit System Flow
-
-```mermaid
-sequenceDiagram
-  User->>Backend: Send Message
-  Backend->>DB: Check Credits
-  alt Credits > 0
-    DB->>Backend: OK
-    Backend->>AI API: Forward Prompt
-    AI API->>Backend: Return Response
-    Backend->>DB: Deduct Credit
-    Backend->>User: Send Reply
-  else Credits = 0
-    DB->>Backend: No Credits
-    Backend->>User: Error - Out of Credits
-  end
-```
-
----
-
 ## 🗺 Roadmap
-- 💸 Credit Purchase System  
 - 📚 Save Chat History  
 - 🎤 Voice Input Support  
 - 🌐 Multi-language Responses  
+- 📊 User Analytics  
+- 🤖 AI Companion
 
 ---
 
