@@ -10,79 +10,80 @@ const PopUp = ({ isOpen, onClose, title, message, buttons = [], children }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="fixed inset-0 bg-black/70 z-[999] flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-gray-950/70"
         >
           <motion.div
-            initial={{ scale: 0.95, y: 20 }}
+            initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="bg-gray-800 rounded-xl p-6 max-w-md w-full border border-gray-600 relative shadow-xl"
+            exit={{ scale: 0.9, y: 20 }}
+            className="relative bg-gray-900 border border-gray-800 rounded-xl max-w-md w-full p-6 shadow-2xl"
           >
             {/* Close Button */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={onClose}
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-200 transition-colors p-1 rounded-full"
+              className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition"
+              aria-label="Close popup"
             >
-              <XMarkIcon className="h-5 w-5" />
-            </motion.button>
+              <XMarkIcon className="w-5 h-5" />
+            </button>
 
             {/* Content */}
-            <div className="text-center space-y-5">
-              {/* Custom Icon/Header */}
+            <div className="flex flex-col items-center text-center space-y-6">
+              {/* Profile Photo */}
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 p-1 mb-2">
+                <div className="w-full h-full rounded-full bg-gray-900 overflow-hidden">
+                  <img
+                    src="https://avatars.githubusercontent.com/u/160850571?v=4"
+                    alt="Developer"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Custom Content or Default */}
               {children || (
                 <>
-                  <h2 className="text-2xl font-semibold text-yellow-400">
+                  <h3 className="text-xl font-bold text-yellow-400">
                     {title}
-                  </h2>
-                  <p className="text-gray-300 text-sm leading-relaxed">
+                  </h3>
+                  <p className="text-gray-400">
                     {message}
                   </p>
                 </>
               )}
 
               {/* Action Buttons */}
-              <div className="flex justify-center gap-3 mt-6">
+              <div className="flex space-x-4 w-full">
                 {buttons.length === 0 ? (
                   <>
-                    <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={onClose}
-                      className="bg-transparent cursor-pointer border border-gray-500 text-gray-300 hover:bg-gray-700 hover:border-gray-400 font-medium py-2 px-5 rounded-lg text-sm transition-colors"
-                    >
-                      Follow Later
-                    </motion.button>
-                    <motion.a
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
+                    <a
                       href="https://www.instagram.com/201harshs/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center py-3 px-4 bg-gradient-to-br from-amber-600 to-yellow-900 rounded-lg hover:opacity-90 transition text-white"
                     >
-                      <button onClick={onClose} className="bg-gradient-to-r cursor-pointer from-amber-500 to-yellow-600 text-white font-medium py-2 px-5 rounded-lg text-sm shadow-md hover:shadow-lg transition-all">
-                        Follow Me
-                      </button>
-                    </motion.a>
+                      Follow Me
+                    </a>
+                    <button
+                      onClick={onClose}
+                      className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg transition bg-gray-800 hover:bg-gray-700 text-gray-300"
+                    >
+                      Follow Later
+                    </button>
                   </>
                 ) : (
                   buttons.map((button, index) => (
-                    <motion.button
+                    <button
                       key={index}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
                       onClick={button.onClick}
-                      className={`${
+                      className={`flex-1 flex items-center justify-center py-3 px-4 rounded-lg transition ${
                         button.type === "primary"
-                          ? "bg-gradient-to-r from-amber-500 to-yellow-600 text-white"
-                          : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                      } font-medium py-2 px-5 rounded-lg text-sm transition-all shadow-sm`}
+                          ? "bg-gradient-to-br from-amber-500 to-yellow-600 hover:opacity-90 text-white"
+                          : "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                      }`}
                     >
                       {button.label}
-                    </motion.button>
+                    </button>
                   ))
                 )}
               </div>
