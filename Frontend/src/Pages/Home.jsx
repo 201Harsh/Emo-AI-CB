@@ -22,10 +22,9 @@ import AxiosInstance from "../Config/Axios";
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [IsTite, setIsTite] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // Added popup state
+  const [showPopup, setShowPopup] = useState(false);
   const [username, setusername] = useState("");
   const [IsResGen, setIsResGen] = useState(false);
-
   const [activeFeature, setActiveFeature] = useState(0);
 
   const features = [
@@ -66,10 +65,9 @@ const Home = () => {
       }
     };
 
-    // Small timeout to ensure proper window size calculation especially on mobile refresh
     const timeoutId = setTimeout(() => {
-      handleResize(); // Call once after a very short delay
-    }, 100); // 100ms
+      handleResize();
+    }, 100);
 
     window.addEventListener("resize", handleResize);
 
@@ -120,7 +118,6 @@ const Home = () => {
   useEffect(() => {
     const handleStartServer = async () => {
       const res = await AxiosInstance.get("/users/startServer");
-
     };
     handleStartServer();
   }, []);
@@ -155,10 +152,11 @@ const Home = () => {
         )}
 
         <div className="flex h-full w-full md:pt-2 pt-16 relative justify-between">
-          {/* Sidebar */}
+          {/* Sidebar - 20% width in desktop mode */}
           <div
             className={`fixed md:relative z-40 top-0 left-0 h-full bg-gray-800 text-white transition-transform duration-300
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:w-72 w-80`}
+              ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+              w-[80vw] md:w-[20%] lg:w-[20%] xl:w-[20%]`}
           >
             {/* Close button inside sidebar */}
             <XMarkIcon
@@ -166,30 +164,30 @@ const Home = () => {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Sidebar content */}
-            <div className="flex flex-col justify-between h-full p-4">
-              <div>
+            {/* Sidebar content - Added min-width constraints */}
+            <div className="flex flex-col justify-between h-full p-4 overflow-y-auto">
+              <div className="min-w-[200px]">
                 <div className="flex items-center mb-14">
                   <CpuChipIcon className="h-8 w-8 text-yellow-400" />
-                  <span className="ml-2 text-xl font-bold text-yellow-400">
+                  <span className="ml-2 text-xl font-bold text-yellow-400 whitespace-nowrap">
                     EmoAI ChatBot
                   </span>
                 </div>
                 <div className="flex flex-col gap-4 p-4">
                   <Link
                     to="/home"
-                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md whitespace-nowrap"
                   >
-                    <HomeIcon className="w-6 h-6 text-yellow-400" />
-                    <span>Home</span>
+                    <HomeIcon className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                    <span className="truncate">Home</span>
                   </Link>
 
                   <Link
                     to="/profile"
-                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md whitespace-nowrap"
                   >
-                    <UserIcon className="w-6 h-6 text-yellow-400" />
-                    <span>Profile</span>
+                    <UserIcon className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                    <span className="truncate">Profile</span>
                   </Link>
 
                   <Link
@@ -197,35 +195,35 @@ const Home = () => {
                     onClick={() => {
                       localStorage.removeItem("responseornot");
                       localStorage.removeItem("chat_messages");
-                      IsResGen(false);
+                      setIsResGen(false);
                     }}
-                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md whitespace-nowrap"
                   >
-                    <ChatBubbleLeftIcon className="w-6 h-6 text-yellow-400" />
-                    <span>New Chat</span>
+                    <ChatBubbleLeftIcon className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                    <span className="truncate">New Chat</span>
                   </Link>
 
                   <Link
                     to="/settings"
-                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md whitespace-nowrap"
                   >
-                    <Cog6ToothIcon className="w-6 h-6 text-yellow-400" />
-                    <span>Settings</span>
+                    <Cog6ToothIcon className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                    <span className="truncate">Settings</span>
                   </Link>
                 </div>
               </div>
 
               {/* Toggle Splash Cursor Button at bottom */}
-              <div className="p-4">
+              <div className="min-w-[200px]">
                 <div className="flex items-center gap-2 p-2">
-                  <span className="text-sm font-semibold text-gray-300">
+                  <span className="text-sm font-semibold text-gray-300 whitespace-nowrap">
                     Logout Account
                   </span>
                 </div>
                 <div className="p-4 border-t border-white/10">
                   <button
                     onClick={handleLogout}
-                    className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all"
+                    className="cursor-pointer active:scale-95 w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 duration-100 transition-all whitespace-nowrap"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +231,7 @@ const Home = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-6"
+                      className="size-6 flex-shrink-0"
                     >
                       <path
                         strokeLinecap="round"
@@ -241,14 +239,14 @@ const Home = () => {
                         d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
                       />
                     </svg>
-                    Log Out
+                    <span className="truncate">Log Out</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Main content area */}
+          {/* Main content area - 80% width in desktop mode */}
           <div className="bg-gray-900 h-full w-full md:w-[80%]">
             {!IsResGen ? (
               <div className="flex flex-col items-center justify-center h-full w-full font-[poppins] p-4 relative z-10 overflow-hidden">
@@ -391,8 +389,6 @@ const Home = () => {
                     className="cursor-pointer w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-gray-900 font-bold py-4 px-6 rounded-xl
           shadow-lg transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden"
                   >
-                    {/* Button shine effect */}
-                    <motion.div />
                     <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
                     Start Conversation
                     <PaperAirplaneIcon className="h-5 w-5" />
