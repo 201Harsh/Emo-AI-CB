@@ -1,4 +1,5 @@
 const EmoAi = require("../config/EmoAI");
+const EMOAI = require("../services/EmoAI");
 const userModel = require("../models/user.model");
 
 module.exports.genResponse = async (req, res) => {
@@ -21,7 +22,7 @@ module.exports.genResponse = async (req, res) => {
       });
     }
 
-    const response = await EmoAi(prompt, User);
+    const response = await EMOAI({prompt, User});
     res.status(200).json({
       response,
     });
