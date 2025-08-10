@@ -414,7 +414,7 @@ const ChatUI = () => {
       {/* Chat Container */}
       <div className="flex-1 flex flex-col relative z-10 h-full">
         {/* Messages Container - Adjusted to account for fixed input */}
-        <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-4 pb-24 md:pb-28 scrollbar-thin scrollbar-thumb-yellow-600/50 scrollbar-track-transparent">
+        <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-4 pt-20 pb-24 md:pb-28 scrollbar-thin scrollbar-thumb-yellow-600/50 scrollbar-track-transparent">
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full p-6">
               <div className="relative bg-gradient-to-br from-yellow-900/30 to-amber-950/40 p-8 rounded-2xl max-w-lg w-full border border-amber-800/50 backdrop-blur-sm shadow-lg overflow-hidden">
@@ -555,7 +555,6 @@ const ChatUI = () => {
             >
               <input
                 type="text"
-                autoFocus
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 placeholder="Type your message..."

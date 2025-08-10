@@ -133,7 +133,7 @@ const Home = () => {
       <div className="h-screen w-screen bg-gray-900 relative overflow-hidden">
         {/* Button to open sidebar */}
         {IsTite ? (
-          <header className="absolute top-0 left-0 right-0 z-10 bg-transparent backdrop-blur-sm border-b border-gray-800 h-16 flex items-center px-4">
+          <header className="fixed top-0 left-0 right-0 z-40 bg-transparent backdrop-blur-sm border-b border-gray-800 h-16 flex items-center px-4">
             <div className="flex items-center gap-4">
               <div onClick={() => setIsOpen(true)} className="flex">
                 <CpuChipIcon className="h-8 w-8 text-yellow-400" />
