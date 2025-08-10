@@ -146,6 +146,7 @@ const Register = () => {
         });
       }
     } catch (error) {
+      console.log(error);
       const errors = error.response?.data?.errors;
       if (Array.isArray(errors)) {
         errors.forEach((err) => {
@@ -162,7 +163,7 @@ const Register = () => {
           });
         });
       } else {
-        toast.error(error.response?.data?.errors || error.response.data?.message, {
+        toast.error(error.response.data?.errors || error.response.data?.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

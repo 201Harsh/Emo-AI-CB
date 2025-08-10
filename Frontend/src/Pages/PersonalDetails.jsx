@@ -17,25 +17,11 @@ import AxiosInstance from "../Config/Axios";
 import { toast, Bounce } from "react-toastify";
 
 const PersonalDetails = () => {
-  const [profilePic, setProfilePic] = useState(null);
-  const [previewImage, setPreviewImage] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [aiCompanionType, setAiCompanionType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePic(file);
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleCompanionSelect = (option) => {
     setAiCompanionType(option);
@@ -63,9 +49,6 @@ const PersonalDetails = () => {
 
     try {
       const formData = new FormData();
-      if (profilePic) {
-        formData.append("profilePic", profilePic);
-      }
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("aiCompanionType", aiCompanionType);
@@ -167,39 +150,6 @@ const PersonalDetails = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Profile Picture */}
-            <div className="flex flex-col items-center mb-6">
-              <div className="relative group">
-                <div className="h-32 w-32 rounded-full bg-gray-800 border-2 border-yellow-500/50 flex items-center justify-center overflow-hidden">
-                  {previewImage ? (
-                    <img
-                      src={previewImage}
-                      alt="Profile preview"
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <UserIcon className="h-16 w-16 text-gray-400" />
-                  )}
-                </div>
-                <label
-                  htmlFor="profilePic"
-                  className="absolute bottom-0 right-0 bg-yellow-500 rounded-full p-2 cursor-pointer hover:bg-yellow-600 transition-colors shadow-lg"
-                >
-                  <CameraIcon className="h-5 w-5 text-gray-900" />
-                  <input
-                    id="profilePic"
-                    name="profilePic"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                </label>
-              </div>
-              <p className="mt-2 text-sm text-gray-300">
-                Upload a profile picture (optional)
-              </p>
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Age Input */}
