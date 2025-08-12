@@ -146,7 +146,6 @@ const Register = () => {
         });
       }
     } catch (error) {
-      console.log(error);
       const errors = error.response?.data?.errors;
       if (Array.isArray(errors)) {
         errors.forEach((err) => {
@@ -319,7 +318,6 @@ const Register = () => {
                 <input
                   type="text"
                   name="name"
-                  autoFocus
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}

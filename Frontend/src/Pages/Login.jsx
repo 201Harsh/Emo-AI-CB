@@ -204,7 +204,6 @@ const Login = () => {
                   name="email"
                   value={email}
                   required
-                  autoFocus
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-gray-800/60 text-gray-100 rounded-lg border border-gray-700 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all placeholder:text-gray-400"
                   placeholder="Enter your email"
