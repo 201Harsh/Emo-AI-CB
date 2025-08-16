@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 // 🔐 Attach token dynamically before every request

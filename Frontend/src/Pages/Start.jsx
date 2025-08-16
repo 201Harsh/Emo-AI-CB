@@ -257,9 +257,14 @@ export default function Start() {
 
   useEffect(() => {
     const handleStartServer = async () => {
-      const res = await AxiosInstance.get("/users/startServer");
-      console.log(res.data.message);
-      console.log(res.data.data.status);
+      try {
+        const res = await AxiosInstance.get("/users/startServer");
+        if (res.status === 200) {
+          console.log(res.data);
+        }
+      } catch (error) {
+        console.error("Error starting server:", error);
+      }
     };
     handleStartServer();
   }, []);
