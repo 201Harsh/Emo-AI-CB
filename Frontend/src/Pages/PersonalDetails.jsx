@@ -52,12 +52,21 @@ const PersonalDetails = () => {
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("aiCompanionType", aiCompanionType);
+      const token = localStorage.getItem("token");
 
-      const response = await AxiosInstance.post("/users/CreateUserInfo", {
-        age,
-        gender,
-        AICompanion: aiCompanionType,
-      });
+      const response = await AxiosInstance.post(
+        "/users/CreateUserInfo",
+        {
+          age,
+          gender,
+          AICompanion: aiCompanionType,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
         toast.success("Profile updated successfully!", {
@@ -150,7 +159,6 @@ const PersonalDetails = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Age Input */}
               <div>

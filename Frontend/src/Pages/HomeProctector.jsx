@@ -15,7 +15,11 @@ const HomeProctector = ({ children }) => {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const res = await AxiosInstance.get("/users/getUser");
+        const res = await AxiosInstance.get("/users/getUser",{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         if (res.status === 200) {
           localStorage.setItem("AICompanion", res.data.data.AICompanion);
           setTimeout(() => {
