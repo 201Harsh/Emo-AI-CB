@@ -164,7 +164,7 @@ See [LICENSE](./LICENSE) for details.
 ---
 
 ## 🌍 Live Demo
-🔗 **[View Live App](https://emoaichatbot.onrender.com/)**
+🔗 **[View Live App](https://emoainextgen.onrender.com)**
 
 ---
 
